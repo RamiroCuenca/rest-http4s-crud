@@ -1,0 +1,28 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(run, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: Compile / run[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[31merror[0m] [0m[0mjava.net.BindException: Address already in use[0m
+[0m[[0m[31merror[0m] [0m[0m	at java.base/sun.nio.ch.Net.bind0(Native Method)[0m
+[0m[[0m[31merror[0m] [0m[0m	at java.base/sun.nio.ch.Net.bind(Net.java:555)[0m
+[0m[[0m[31merror[0m] [0m[0m	at java.base/sun.nio.ch.Net.bind(Net.java:544)[0m
+[0m[[0m[31merror[0m] [0m[0m	at java.base/sun.nio.ch.AsynchronousServerSocketChannelImpl.bind(AsynchronousServerSocketChannelImpl.java:164)[0m
+[0m[[0m[31merror[0m] [0m[0m	at java.base/java.nio.channels.AsynchronousServerSocketChannel.bind(AsynchronousServerSocketChannel.java:198)[0m
+[0m[[0m[31merror[0m] [0m[0m	at fs2.io.net.SocketGroupCompanionPlatform$AsyncSocketGroup.$anonfun$3$$anonfun$1(SocketGroupPlatform.scala:91)[0m
+[0m[[0m[31merror[0m] [0m[0m	at delay @ fs2.io.net.SocketGroupCompanionPlatform$AsyncSocketGroup.$anonfun$2(SocketGroupPlatform.scala:95)[0m
+[0m[[0m[31merror[0m] [0m[0m	at traverse @ fs2.io.net.SocketGroupCompanionPlatform$AsyncSocketGroup.serverResource(SocketGroupPlatform.scala:84)[0m
+[0m[[0m[31merror[0m] [0m[0m	at flatMap @ fs2.io.net.SocketGroupCompanionPlatform$AsyncSocketGroup.serverResource(SocketGroupPlatform.scala:95)[0m
+[0m[[0m[31merror[0m] [0m[0m	at make @ org.typelevel.keypool.KeyPool$Builder.build(KeyPool.scala:341)[0m
+[0m[[0m[31merror[0m] [0m[0m	at make @ org.typelevel.keypool.KeyPool$Builder.build(KeyPool.scala:341)[0m
+[0m[[0m[31merror[0m] [0m[0m	at uncancelable @ fs2.Pull$.acquireCancelable(Pull.scala:375)[0m
+[0m[[0m[31merror[0m] [0m[0m	at flatMap @ fs2.Compiler$Target.flatMap(Compiler.scala:162)[0m
+[0m[[0m[31merror[0m] [0m[0m	at handleErrorWith @ fs2.Compiler$Target.handleErrorWith(Compiler.scala:160)[0m
+[0m[[0m[31merror[0m] [0m[0m	at flatMap @ fs2.Compiler$Target.flatMap(Compiler.scala:162)[0m
+[0m[[0m[31merror[0m] [0m[0m	at uncancelable @ fs2.Compiler$Target.uncancelable(Compiler.scala:164)[0m
+[0m[[0m[31merror[0m] [0m[0m	at unique @ fs2.Compiler$Target$ConcurrentTarget.unique(Compiler.scala:189)[0m
+[0m[[0m[31merror[0m] [0m[0m	at flatMap @ fs2.Compiler$Target.flatMap(Compiler.scala:162)[0m
+[0m[[0m[31merror[0m] [0m[0m	at ref @ fs2.Compiler$Target$ConcurrentTarget.ref(Compiler.scala:190)[0m
+[0m[[0m[31merror[0m] [0m[0m	at flatMap @ fs2.Compiler$Target.flatMap(Compiler.scala:162)[0m
+[0m[[0m[31merror[0m] [0m[0m	at flatMap @ fs2.Compiler$Target.flatMap(Compiler.scala:162)[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mrun[0m) java.net.BindException: Address already in use[0m
+[0m[[0m[31merror[0m] [0m[0mTotal time: 3 s, completed Nov 9, 2022, 10:12:47 AM[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(idea-shell, None, None)[0m
