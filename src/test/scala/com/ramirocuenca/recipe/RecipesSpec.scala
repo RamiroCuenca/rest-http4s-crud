@@ -3,10 +3,11 @@ package com.ramirocuenca.recipe
 import java.util.UUID
 
 import cats.effect.IO
-import com.example.recipeservice.Recipes.{Recipe, RecipeMessage}
+import com.ramirocuenca.recipe.Recipes.{Recipe, RecipeMessage}
 import org.http4s._
 import org.http4s.implicits._
 import munit.CatsEffectSuite
+import munit.Clue.generate
 import org.http4s
 import io.circe.syntax._
 import org.http4s.circe._
@@ -15,10 +16,7 @@ import org.http4s.circe._
 1. Create Testing class => RecipesSpec.
 2. Create a server instance. We need to provide the routes to it.
 3. Execute HTTP calls/requests. 
-4. Create test cases:
-    test("case description") {
-      val ${scenario}Response: Response[IO] = ${HTTP request from 4)}
-    }
+4. Create test cases.
 */
 
 /* 1) Create Testing class */
