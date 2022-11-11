@@ -32,7 +32,7 @@ object RecipeServer:
       exitCode <- Stream.resource(
         EmberServerBuilder.default[F]
           .withHost(ipv4"0.0.0.0")
-          .withPort(port"8080")
+          .withPort(port"8081")
           .withHttpApp(finalHttpApp)
           .build >>
         Resource.eval(Async[F].never)
