@@ -11,6 +11,11 @@ import org.http4s.{EntityDecoder, EntityEncoder}
 
 import scala.collection.mutable.ListBuffer
 
+/*
+1. Create case class of the element and define it parameters.
+2. Create an object (singleton) of the element and define encoders and decoders methods for it (as implicits).
+*/
+
 trait Recipes[F[_]] {
   def create(recipe: Recipes.Recipe): F[Either[RecipeMessage, Recipe]]
 
@@ -54,6 +59,7 @@ object Recipes {
 
   case class Recipe(id: Option[UUID] = None, name: String)
 
+  /* 1) Create case class of the element and define it parameters */
   case class RecipeMessage(message: String)
 
   object RecipeMessage {
@@ -67,6 +73,7 @@ object Recipes {
 
   }
 
+  /* 2) Create an object (singleton) of the element and define encoders and decoders methods for it (as implicits) */
   object Recipe {
     implicit val recipeDecoder: Decoder[Recipe] = deriveDecoder[Recipe]
 

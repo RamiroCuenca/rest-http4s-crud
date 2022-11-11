@@ -2,7 +2,7 @@ package com.ramirocuenca.recipe
 
 import cats.effect.Sync
 import cats.implicits._
-import com.example.recipeservice.Recipes.{Recipe, RecipeMessage}
+import com.ramirocuenca.recipe.Recipes.{Recipe, RecipeMessage}
 import org.http4s.HttpRoutes
 import org.http4s.dsl.Http4sDsl
 
@@ -26,7 +26,7 @@ object RecipeRoutes {
     HttpRoutes.of[F] {
       case request @ POST -> Root / "recipes" =>
         for {
-          recipe <- request.as[Recipe]
+          recipe <- request.as[Recipe] // Decode using EntityDecoder
           createdRecipeE <- recipes.create(recipe)
           resp <- createdRecipeE match {
             case Left(message) => BadRequest(message)

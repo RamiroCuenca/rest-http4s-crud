@@ -1,41 +1,32 @@
 package com.ramirocuenca.recipe
 
-import cats.effect.{Async, Resource}
-import cats.syntax.all._
-import com.comcast.ip4s._
+import cats.effect.ConcurrentEffect
+import cats.effect.Timer
 import fs2.Stream
-import org.http4s.ember.client.EmberClientBuilder
-import org.http4s.ember.server.EmberServerBuilder
-import org.http4s.implicits._
+import org.http4s.implicits.*
+import org.http4s.server.blaze.BlazeServerBuilder
 import org.http4s.server.middleware.Logger
 
-object RecipeServer:
+import scala.concurrent.ExecutionContext.global
 
-  def stream[F[_]: Async]: Stream[F, Nothing] = {
-    for {
-      client <- Stream.resource(EmberClientBuilder.default[F].build)
-      helloWorldAlg = HelloWorld.impl[F]
-      jokeAlg = Jokes.impl[F](client)
+object RecipeServer {
 
-      // Combine Service Routes into an HttpApp.
-      // Can also be done via a Router if you
-      // want to extract a segments not checked
-      // in the underlying routes.
-      httpApp = (
-        RecipeRoutes.helloWorldRoutes[F](helloWorldAlg) <+>
-        RecipeRoutes.jokeRoutes[F](jokeAlg)
+  def stream[F[_] : ConcurrentEffect](implicit T: Timer[F]): Stream[F, Nothing] = {
+    // Combine Service Routes into an HttpApp.
+    // Can also be done via a Router if you
+    // want to extract a segments not checked
+    // in the underlying routes.
+    val httpApp = (
+      RecipeserviceRoutes.recipeRoutes[F](Recipes.impl[F]())
       ).orNotFound
+    // With Middlewares in place
+    val finalHttpApp = Logger.httpApp(true, true)(httpApp)
 
-      // With Middlewares in place
-      finalHttpApp = Logger.httpApp(true, true)(httpApp)
-
-      exitCode <- Stream.resource(
-        EmberServerBuilder.default[F]
-          .withHost(ipv4"0.0.0.0")
-          .withPort(port"8081")
-          .withHttpApp(finalHttpApp)
-          .build >>
-        Resource.eval(Async[F].never)
-      )
+    for {
+      exitCode <- BlazeServerBuilder[F](global)
+        .bindHttp(8080, "0.0.0.0")
+        .withHttpApp(finalHttpApp)
+        .serve
     } yield exitCode
   }.drain
+}
