@@ -24,7 +24,7 @@ class RecipesSpec extends CatsEffectSuite {
 
   /* 2) Create a server instance */
   val server: http4s.HttpApp[IO] = {
-    RecipeserviceRoutes.recipeRoutes[IO](Recipes.impl[IO]()).orNotFound
+    RecipeRoutes.recipeRoutes[IO](Recipes.impl[IO]()).orNotFound
   }
 
   /* 3) Execute HTTP calls */
