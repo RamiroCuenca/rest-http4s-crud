@@ -1,7 +1,7 @@
 package com.ramirocuenca.recipe
 
-import cats.effect.ConcurrentEffect
-import cats.effect.Timer
+//import cats.effect.{ConcurrentEffect, Timer}
+import cats.effect._
 import fs2.Stream
 import org.http4s.implicits.*
 import org.http4s.server.blaze.BlazeServerBuilder
@@ -17,7 +17,7 @@ object RecipeServer {
     // want to extract a segments not checked
     // in the underlying routes.
     val httpApp = (
-      RecipeserviceRoutes.recipeRoutes[F](Recipes.impl[F]())
+      RecipeRoutes.recipeRoutes[F](Recipes.impl[F]())
       ).orNotFound
     // With Middlewares in place
     val finalHttpApp = Logger.httpApp(true, true)(httpApp)
